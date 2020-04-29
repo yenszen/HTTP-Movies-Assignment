@@ -26,9 +26,25 @@ function Movie({ addToSavedList, ...props }) {
     return <div>Loading movie information...</div>;
   }
 
+  const onDelete = () => {
+    axios
+      .delete(`http://localhost:5000/api/movies/${movie.id}`)
+      .then(res => {
+        props.updateMovies(res.data);
+        props.history.push("/");
+      })
+      .catch(err => console.log(err));
+  };
+
   return (
     <div className="save-wrapper">
       <MovieCard {...props} movie={movie} />
+
+      <button onClick={() => props.history.push(`/update-form/${movie.id}`)}>
+        Edit Movie
+      </button>
+
+      <button onClick={onDelete}>Delete Movie</button>
 
       <div className="save-button" onClick={saveMovie}>
         Save
