@@ -3,7 +3,8 @@ import { Route } from "react-router-dom";
 import SavedList from "./Movies/SavedList";
 import MovieList from "./Movies/MovieList";
 import Movie from "./Movies/Movie";
-import axios from 'axios';
+import axios from "axios";
+import UpdateForm from "./Movies/UpdateForm";
 
 const App = () => {
   const [savedList, setSavedList] = useState([]);
@@ -25,17 +26,43 @@ const App = () => {
   }, []);
 
   return (
-    <>
+    <React.Fragment>
       <SavedList list={savedList} />
 
-      <Route exact path="/">
-        <MovieList movies={movieList} />
-      </Route>
+      <Route
+        exact
+        path="/"
+        render={props => (
+          <MovieList
+            {...props}
+            movies={movieList}
+            updateMovies={setMovieList}
+          />
+        )}
+      ></Route>
 
-      <Route path="/movies/:id">
-        <Movie addToSavedList={addToSavedList} />
-      </Route>
-    </>
+      <Route
+        path="/movies/:id"
+        render={props => (
+          <Movie
+            {...props}
+            addToSavedList={addToSavedList}
+            updateMovies={setMovieList}
+          />
+        )}
+      ></Route>
+
+      <Route
+        path="/update-form/:id"
+        render={props => (
+          <UpdateForm
+            {...props}
+            movies={movieList}
+            updateMovies={setMovieList}
+          />
+        )}
+      ></Route>
+    </React.Fragment>
   );
 };
 
