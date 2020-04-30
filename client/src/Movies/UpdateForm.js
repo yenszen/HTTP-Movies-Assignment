@@ -36,11 +36,11 @@ const UpdateForm = props => {
     axios
       .put(`http://localhost:5000/api/movies/${movie.id}`, movie)
       .then(res => {
-        console.log(res);
-        // console.log("props.movies", props.movies);
-        // console.log("movie.id", { [movie.id]: res.data });
-        // props.updateMovies([...props.movies, { [res.data.id]: res.data }]);
-        // props.updateMovies();
+        const newArr = props.movies.map(movie =>
+          movie.id === res.data.id ? (movie = res.data) : movie
+        );
+
+        props.updateMovies(newArr);
         props.history.push("/");
       })
       .catch(err => console.log(err));
