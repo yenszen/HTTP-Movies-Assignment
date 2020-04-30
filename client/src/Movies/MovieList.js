@@ -9,7 +9,7 @@ function MovieList({ movies, ...props }) {
           key={movie.id}
           onClick={() => props.history.push(`/movies/${movie.id}`)}
         >
-          <MovieCard {...props} movie={movie} />
+          <MovieCard movie={movie} />
         </div>
       ))}
     </div>

@@ -48,6 +48,7 @@ const App = () => {
             {...props}
             addToSavedList={addToSavedList}
             updateMovies={setMovieList}
+            movies={movieList}
           />
         )}
       ></Route>

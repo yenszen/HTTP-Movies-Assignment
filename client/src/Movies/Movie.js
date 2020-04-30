@@ -30,7 +30,9 @@ function Movie({ addToSavedList, ...props }) {
     axios
       .delete(`http://localhost:5000/api/movies/${movie.id}`)
       .then(res => {
-        props.updateMovies(res.data);
+        console.log(res);
+        const newArray = props.movies.filter(movie => movie.id !== res.data);
+        props.updateMovies(newArray);
         props.history.push("/");
       })
       .catch(err => console.log(err));
@@ -38,7 +40,7 @@ function Movie({ addToSavedList, ...props }) {
 
   return (
     <div className="save-wrapper">
-      <MovieCard {...props} movie={movie} />
+      <MovieCard movie={movie} />
 
       <button onClick={() => props.history.push(`/update-form/${movie.id}`)}>
         Edit Movie
