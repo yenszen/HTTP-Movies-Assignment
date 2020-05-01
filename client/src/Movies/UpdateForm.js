@@ -29,12 +29,13 @@ const UpdateForm = props => {
     });
   };
 
-  // console.log("movie", movie);
-
   const onFormSubmit = e => {
     e.preventDefault();
     axios
-      .put(`http://localhost:5000/api/movies/${movie.id}`, movie)
+      .put(`http://localhost:5000/api/movies/${movie.id}`, {
+        ...movie,
+        stars: movie.stars.split(",")
+      })
       .then(res => {
         const newArr = props.movies.map(movie =>
           movie.id === res.data.id ? (movie = res.data) : movie
@@ -67,8 +68,14 @@ const UpdateForm = props => {
           value={movie.metascore}
           onChange={onInputChange}
         />
+        <input
+          type="text"
+          name="stars"
+          value={movie.stars}
+          onChange={onInputChange}
+        />
 
-        <button type="submit">Update</button>
+        <button type="submit">Update Movie</button>
       </form>
     </div>
   );
