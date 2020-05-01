@@ -5,6 +5,7 @@ import MovieList from "./Movies/MovieList";
 import Movie from "./Movies/Movie";
 import axios from "axios";
 import UpdateForm from "./Movies/UpdateForm";
+import AddForm from "./Movies/AddForm";
 
 const App = () => {
   const [savedList, setSavedList] = useState([]);
@@ -62,6 +63,11 @@ const App = () => {
             updateMovies={setMovieList}
           />
         )}
+      ></Route>
+
+      <Route
+        path="/add-movie"
+        render={props => <AddForm {...props} updateMovies={setMovieList} />}
       ></Route>
     </React.Fragment>
   );
