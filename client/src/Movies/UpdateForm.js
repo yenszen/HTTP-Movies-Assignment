@@ -18,7 +18,7 @@ const UpdateForm = props => {
     );
 
     if (selectedMovie) {
-      setMovie(selectedMovie);
+      setMovie({ ...selectedMovie, stars: selectedMovie.stars.join(", ") });
     }
   }, [props.movies, props.match.params.id]);
 
@@ -34,7 +34,7 @@ const UpdateForm = props => {
     axios
       .put(`http://localhost:5000/api/movies/${movie.id}`, {
         ...movie,
-        stars: movie.stars.split(",")
+        stars: movie.stars.split(", ")
       })
       .then(res => {
         const newArr = props.movies.map(movie =>
