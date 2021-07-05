@@ -1,17 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import MovieCard from "./MovieCard";
 
-function MovieList({ movies }) {
+function MovieList({ movies, ...props }) {
   return (
     <div className="movie-list">
-      {
-        movies.map(movie => (
-          <Link key={movie.id} to={`/movies/${movie.id}`}>
-            <MovieCard movie={movie} />
-          </Link>
-        ))
-      }
+      <button onClick={() => props.history.push("/add-movie")}>
+        Add new movie
+      </button>
+      {movies.map(movie => (
+        <div
+          key={movie.id}
+          onClick={() => props.history.push(`/movies/${movie.id}`)}
+        >
+          <MovieCard movie={movie} />
+        </div>
+      ))}
     </div>
   );
 }
